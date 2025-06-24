@@ -7,6 +7,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -18,13 +19,16 @@ public class FinnhubStreamService {
     private KafkaTemplate<String, String> kafkaTemplate;
     private WebSocketClient webSocketClient;
 
-    // Replace with your actual API key from Finnhub
-    private final String apiKey = "d0remd9r01qn4tji8850d0remd9r01qn4tji885g";
-    private final String socketUrl = "wss://ws.finnhub.io?token=" + apiKey;
+    @Value("${finnhub.api.key}")
+    private String apiKey;
+    
+    private String socketUrl;
+
     private final String topic = "market-data";
 
     @PostConstruct
     public void connect() {
+        this.socketUrl = "wss://ws.finnhub.io?token=" + apiKey;
         try {
             URI uri = new URI(socketUrl);
 

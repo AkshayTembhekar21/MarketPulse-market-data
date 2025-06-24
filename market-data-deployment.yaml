@@ -23,7 +23,7 @@ spec:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: "my-kafka:9092"
             - name: FINNHUB_API_KEY
-              value: "YOUR_FINNHUB_API_KEY"
+              value: "d0remd9r01qn4tji8850d0remd9r01qn4tji885g"
 ---
 apiVersion: v1
 kind: Service
